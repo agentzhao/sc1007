@@ -59,13 +59,13 @@ ListNode *findNode(ListNode *cur, int index) {
   return cur;
 }
 
-int insertNode(ListNode **ptrHead, int index, int item) {
-  ListNode *pre, *newNode;
-  // If empty list or inserting first node, update head pointer
+int insertNode(ListNode **ptrHead, int index, int item) {
+  ListNode *pre, *newNode;
+  // If empty list or inserting first node, update head pointer
   if (index == 0) {
-    newNode = malloc(sizeof(ListNode));
-    newNode->item = item;
-    newNode->next = *ptrHead;
+    newNode = malloc(sizeof(ListNode));
+    newNode->item = item;
+    newNode->next = *ptrHead;
     *ptrHead = newNode;
     return 1;
   }
@@ -94,19 +94,17 @@ void deleteList(ListNode **ptrHead) {
 
 int moveMaxToFront(ListNode **ptrHead) {
   ListNode *cur = *ptrHead;
-  int maxItem = cur->item;
-  int pos = 0, maxPos = 0;
+  ListNode *maxNode = *ptrHead;
 
   if (cur == NULL)
     return -1;
   while (cur != NULL) {
-    if (cur->item > maxItem) {
-      maxItem = cur->item;
-      maxPos = pos;
+    if (cur->item > maxNode->item) {
+      maxNode = cur;
     }
-    pos++;
+    cur = cur->next;
   }
-  deleteNode(ptrHead, maxPos);
-  insertNode(ptrHead, 0, maxItem);
-  return maxPos;
+  // delete maxNode
+  insertNode(ptrHead, 0, maxNode->item);
+  return 1;
 }
