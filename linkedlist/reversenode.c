@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -62,10 +63,10 @@ ListNode *reverseSegment(ListNode *head, int start, int end) {
   }
   ListNode *cur = head, *prev = NULL, *temp = head;
   ListNode *segHead, *segTail;
-
+  
   for (int i = 0; i < end; i++) {
     temp = temp->next;
-    if (temp->next == NULL) {
+    if (temp == NULL) {
       return head;
     }
   }
@@ -85,7 +86,7 @@ ListNode *reverseSegment(ListNode *head, int start, int end) {
       segTail = prev;
     i++;
   }
-
+  
   if (start == 0) {
     head = prev;
     segTail->next = cur;

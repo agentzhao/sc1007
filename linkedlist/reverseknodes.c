@@ -55,26 +55,71 @@ void deleteList(ListNode **ptrHead) {
   *ptrHead = NULL;
 }
 
+ListNode *reverseSegment(ListNode *head, int start, int end) {
+  if (end < start) {
+    return head;
+  }
+  ListNode *cur = head, *prev = NULL, *temp = head;
+  ListNode *segHead, *segTail;
+
+  for (int i = 0; i < end; i++) {
+    temp = temp->next;
+    if (temp == NULL) {
+      return head;
+    }
+  }
+
+  for (int i = 0; i < start; i++) {
+    segHead = cur;
+    cur = cur->next;
+  }
+
+  int i = 0;
+  while (cur != NULL && i < end - start + 1) {
+    temp = cur->next;
+    cur->next = prev;
+    prev = cur;
+    cur = temp;
+    if (i == 0)
+      segTail = prev;
+    i++;
+  }
+
+  if (start == 0) {
+    head = prev;
+    segTail->next = cur;
+  } else {
+    segHead->next = prev;
+    segTail->next = cur;
+  }
+
+  return head;
+}
+
 void reverseKNodes(ListNode **head, int K) {
   if (K == 0 || K == 1)
     return;
   if (*head == NULL)
     return;
 
-  ListNode *cur = *head, *prev;
-  ListNode *temp = *head, *segHead, *segTail, *tempCheck, *prevTail, *test;
+  ListNode *cur = *head, *prev = NULL, *temp = *head;
 
-  int count = 0;
-  while (cur != NULL && count < K) {
-    temp = cur->next;
-    cur->next = prev;
-    prev = cur;
-    cur = temp;
-    count++;
+  int start = 0;
+  int end = K - 1;
+
+  while (1) {
+    for (int i = 0; i < K - 1; i++) {
+      // printf("%d\n", temp->item);
+
+      temp = temp->next;
+      if (temp == NULL) {
+        return;
+      }
+      // printf("%d ", temp->item);
+    }
+
+    *head = reverseSegment(*head, start, end);
+    start += K;
+    end += K;
   }
-
-  if (cur != NULL)
-    head->next = reverseKNodes(&cur, K);
-
-  *head = temp;
 }
