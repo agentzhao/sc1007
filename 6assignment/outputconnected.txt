@@ -1,0 +1,6 @@
+Enter the number of vertices:
+Enter two vertices which are adjacent to each other: (press a to stop)
+Enter two vertices which are adjacent to each other: (press a to stop)
+Enter two vertices which are adjacent to each other: (press a to stop)
+Enter two vertices which are adjacent to each other: (press a to stop)
+The graph is not connected.

@@ -110,14 +110,14 @@ int Hash(int key, int hSize) { return key % hSize; }
 
 ListNode *HashSearch(HashTable Q3Hash, int key) {
   int index = Hash(key, Q3Hash.hSize);
-  ListNode *node = Q3Hash.Table[index].head;
+  ListNode *temp = Q3Hash.Table[index].head;
 
-  while (node) {
-    if (node->key == key)
-      return node;
-    node = node->next;
+  while (temp) {
+    if (temp->key == key) {
+      return temp;
+    }
+    temp = temp->next;
   }
-
   return NULL;
 }
 

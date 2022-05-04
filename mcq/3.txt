@@ -1,0 +1,14 @@
+Average key comparison in tree with n node: (n+1)/2
+
+Average-case time complexity for binary search: B,C and D
+
+Preorder of binary tree:
+
+A,B,C,E,D,F,G,H,J
+
+Max nodes at depth k: 3^k
+
+Which statement is not correct:
+
+A graph is a special case of a tree structure.
+

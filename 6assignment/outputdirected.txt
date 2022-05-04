@@ -1,0 +1,9 @@
+Enter the number of vertices:
+Enter a directed edge: (press a to stop)
+Enter a directed edge: (press a to stop)
+Enter a directed edge: (press a to stop)
+Enter a directed edge: (press a to stop)
+Enter a directed edge: (press a to stop)
+Enter a directed edge: (press a to stop)
+Enter a directed edge: (press a to stop)
+The graph is not strongly connected.

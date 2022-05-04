@@ -8,21 +8,19 @@ typedef struct _listnode {
   struct _listnode *next;
 } ListNode;
 
-union GraphForm {
+struct GraphForm {
   int **matrix;
   ListNode **list;
 };
 
 typedef struct _graph {
-  int V; // No of Vertices
-  int E; // No of edges
+  int V;
+  int E;
   enum GraphType type;
-  union GraphForm adj;
+  struct GraphForm adj;
 } Graph;
 
 void printGraphMatrix(Graph);
-void adjM2adjL(Graph *);
-void printGraphList(Graph);
 void calDegreeV(Graph, int *);
 void printDegreeV(int *, int);
 
@@ -65,10 +63,6 @@ int main() {
 
   printGraphMatrix(g);
 
-  adjM2adjL(&g);
-
-  printGraphList(g);
-
   calDegreeV(g, degreeV);
 
   printDegreeV(degreeV, g.V);
@@ -92,88 +86,19 @@ void printGraphMatrix(Graph g) {
   printf("\n");
 }
 
-void adjM2adjL(Graph *g) {
-  if (g->type == ADJ_LIST) {
-    printf("Error: graph is already in list format");
-    return;
-  }
-
-  if (g->V == 0) {
-    printf("Error: Empty graph");
-    return;
-  }
-
-  ListNode **list, *temp;
-  list = malloc(g->V * sizeof(ListNode *));
-  for (int i = 0; i < g->V; i++)
-    list[i] = NULL;
-
-  // Loop through matrix
-  for (int i = 0; i < g->V; i++) {
-    for (int j = 0; j < g->V; j++) {
-      if (g->adj.matrix[i][j] == 1) {
-        if (list[i] == NULL) {
-          list[i] = (ListNode *)malloc(sizeof(ListNode));
-          list[i]->vertex = j + 1;
-          list[i]->next = NULL;
-          temp = list[i];
-        } else {
-          temp->next = (ListNode *)malloc(sizeof(ListNode));
-          temp->next->vertex = j + 1;
-          temp->next->next = NULL;
-          temp = temp->next;
-        }
-      }
-    }
-  }
-
-  g->type = ADJ_LIST; // change representation form
-
-  // free adjMatrix
-  for (int i = 0; i < g->V; i++)
-    free(g->adj.matrix[i]);
-  free(g->adj.matrix);
-
-  g->adj.list = list;
-}
-
-void printGraphList(Graph g) {
-  int i;
-  ListNode *temp;
-  printf("Print graph list \n");
-  if (g.type == ADJ_MATRIX) {
-    printf("Error");
-    return;
-  }
-
-  for (i = 0; i < g.V; i++) {
-    printf("%d:\t", i + 1);
-    temp = g.adj.list[i];
-    while (temp != NULL) {
-      printf("%d -> ", temp->vertex);
-      temp = temp->next;
-    }
-    printf("\n");
-  }
-  printf("\n");
-}
-
-// calculate degree
 void calDegreeV(Graph g, int *degreeV) {
-  ListNode *temp = NULL;
-
-  for (int i = 0; i < g.V; i++) {
-    degreeV[i] = 0;
-    temp = g.adj.list[i];
-    while (temp != NULL) {
-      degreeV[i]++;
-      temp = temp->next;
+  int i, j;
+  for (i = 0; i < g.V; i++) {
+    for (j = 0; j < g.V; j++) {
+      if (g.adj.matrix[i][j] == 1)
+        degreeV[i]++;
     }
   }
 }
 
 void printDegreeV(int *degreeV, int V) {
   int i;
+  printf("Print vertex's degree \n");
   for (i = 0; i < V; i++)
     printf("%d: %d degree\n", i + 1, degreeV[i]);
 }

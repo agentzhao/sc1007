@@ -1,0 +1,9 @@
+Enter the number of vertices:
+Enter two vertices which are adjacent to each other:
+Enter two vertices which are adjacent to each other: (press a to stop)
+Enter two vertices which are adjacent to each other: (press a to stop)
+Enter two vertices which are adjacent to each other: (press a to stop)
+Enter two vertices which are adjacent to each other: (press a to stop)
+Enter two vertices which are adjacent to each other: (press a to stop)
+Enter two vertices for finding their shortest distance: (press a to stop)
+The shortest distance is 2

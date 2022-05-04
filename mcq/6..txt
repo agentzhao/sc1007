@@ -1,0 +1,15 @@
+
+Q1 
+If (u,v) not an edge in G, then u is a leaf in T
+
+Q2
+There can be a loop in graph so we must maintain a visited flag for every vertex
+
+Q3
+QMNPRO
+
+Q4
+I, III and IV only
+
+Q5
+Both BFS and DFS
